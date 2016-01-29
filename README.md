@@ -4,7 +4,7 @@
 
 An image running [ubuntu/15.10](https://github.com/gliderlabs/docker-alpine) Linux and [Spotweb](https://github.com/spotweb/spotweb) (media branch).
 
-This image was mainly for own use, but it seems to be populair so I decided to provide some documentation.
+This image is mainly for own use, but it seems to a be populair image so I decided to provide some documentation.
 
 ## MySQL
 
@@ -29,7 +29,7 @@ The container will try to auto-update the database when a newer version image is
 		jgeusebroek/spotweb
 
 You should now be able to reach the spotweb interface on port 80, and you can configure Spotweb.
-		
+
 ## Environment variables
 
 * `TZ` The timezone the server is running in. Defaults to `Europe/Amsterdam`.
