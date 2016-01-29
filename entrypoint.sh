@@ -1,16 +1,10 @@
 #!/bin/bash
-set -x
-
-SPOTWEB_CRON=${SPOTWEB_CRON:-'*/15 * * * *'}
 
 if [ ! -f /config/ownsettings.php ] && [ -f /var/www/spotweb/ownsettings.php ]; then
   cp /var/www/spotweb/ownsettings.php /config/ownsettings.php
-
-elif [ ! -f /config/ownsettings.php ] && [ ! -f /var/www/spotweb/ownsettings.php ]; then
-  touch /config/ownsettings.php
 fi
 
-chown www-data:www-data /config/ownsettings.php
+touch /config/ownsettings.php && chown www-data:www-data /config/ownsettings.php
 rm -f /var/www/spotweb/ownsettings.php
 ln -s /config/ownsettings.php /var/www/spotweb/ownsettings.php
 
@@ -32,18 +26,14 @@ if [ -f /config/dbsettings.inc.php ]; then
 	# Run database update
 	/usr/bin/php /var/www/spotweb/upgrade-db.php
 else
-	echo "WARNING: You have no database configuration file, either create /config/dbsettings.inc.php or restart this container with the correct environment variables to auto generate the config."
+	echo -e "\nWARNING: You have no database configuration file, either create /config/dbsettings.inc.php or restart this container with the correct environment variables to auto generate the config.\n"
 fi
 
-echo "Updating PHP time zone"
-TIMEZONE=${TIMEZONE:-"Europe/Amsterdam"}
-sed -i "s#^;date.timezone =.*#date.timezone = ${TIMEZONE}#g" /etc/php5/*/php.ini
+TZ=${TZ:-"Europe/Amsterdam"}
+echo -e "Setting (PHP) time zone to ${TZ}\n"
+sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g" /etc/php5/*/php.ini
 
-echo "Enabling PHP mod rewrite"
-/usr/sbin/a2enmod rewrite
+# Enabling PHP mod rewrite
+/usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
 
-echo "Updating hourly cron"
-(crontab -l ; echo "${SPOTWEB_CRON} /usr/bin/php /var/www/spotweb/retrieve.php | tee /var/log/spotweb-retrieve.log") | crontab -
-
-/etc/init.d/apache2 restart
 tail -F /var/log/apache2/*

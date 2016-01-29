@@ -3,8 +3,8 @@ MAINTAINER Jeroen Geusebroek <me@jeroengeusebroek.nl>
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm" \
-    APTLIST="apache2 php5 php5-curl php5-gd php5-gmp php5-mysql git-core sudo cron" \
-    REFRESHED_AT='2015-01-18'
+    APTLIST="apache2 php5 php5-curl php5-gd php5-gmp php5-mysql git-core" \
+    REFRESHED_AT='2015-01-29'
 
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache && \
@@ -19,9 +19,8 @@ RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     rm -r /var/www/html && \
     rm -rf /tmp/*
 
-RUN git clone https://github.com/spotweb/spotweb.git /var/www/spotweb && \
-    cd /var/www/spotweb && \
-    git checkout media && \
+RUN git clone -b media --single-branch https://github.com/spotweb/spotweb.git /var/www/spotweb && \
+    rm -rf /var/www/spotweb/.git && \
     chmod -R 775 /var/www/spotweb && \
     chown -R www-data:www-data /var/www/spotweb
 
