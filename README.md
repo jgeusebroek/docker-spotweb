@@ -4,15 +4,10 @@
 
 An image running [ubuntu/15.10](https://github.com/gliderlabs/docker-alpine) Linux and [Spotweb](https://github.com/spotweb/spotweb) (media branch).
 
-This image is mainly for own use, but it seems to a be populair image so I decided to provide some documentation.
-
-## MySQL
+## Requirements
 
 You need a seperate MySQL / MariaDB server. This can be a ofcourse be a (linked) docker container but also a dedicated database server.
 
-## Updates
-
-The container will try to auto-update the database when a newer version image is  released.
 
 ## Usage
 
@@ -30,7 +25,20 @@ The container will try to auto-update the database when a newer version image is
 
 You should now be able to reach the spotweb interface on port 80, and you can configure Spotweb.
 
-## Environment variables
+### Automatic retreiving of posts
+
+To enable automatic retreiving, you need to setup a cronjob on the docker host.
+
+	*/15 * * * * docker exec spotweb /usr/bin/php /var/www/spotweb/retrieve.php >/dev/null 2>&1
+
+This example will retrieve new posts every 15 minutes.
+
+### Updates
+
+The container will try to auto-update the database when a newer version image is  released.
+
+
+### Environment variables
 
 * `TZ` The timezone the server is running in. Defaults to `Europe/Amsterdam`.
 * `SPOTWEB_DB_TYPE` Database type. Use `pdo_mysql` for MySQL.
