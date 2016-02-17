@@ -4,7 +4,7 @@ MAINTAINER Jeroen Geusebroek <me@jeroengeusebroek.nl>
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm" \
     APTLIST="apache2 php5 php5-curl php5-gd php5-gmp php5-mysql git-core" \
-    REFRESHED_AT='2015-01-29'
+    REFRESHED_AT='2015-02-17'
 
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache && \
