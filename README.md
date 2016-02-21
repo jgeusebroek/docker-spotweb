@@ -6,7 +6,7 @@ An image running [ubuntu/15.10](https://github.com/gliderlabs/docker-alpine) Lin
 
 ## Requirements
 
-You need a seperate MySQL / MariaDB server. This can be a ofcourse be a (linked) docker container but also a dedicated database server.
+You need a seperate MySQL / MariaDB server. This can of course be a (linked) docker container but also a dedicated database server.
 
 
 ## Usage
@@ -25,13 +25,13 @@ You need a seperate MySQL / MariaDB server. This can be a ofcourse be a (linked)
 
 You should now be able to reach the spotweb interface on port 80, and you can configure Spotweb.
 
-### Automatic retreiving of posts
+### Automatic retreiving of new spots
 
 To enable automatic retreiving, you need to setup a cronjob on the docker host.
 
 	*/15 * * * * docker exec spotweb /usr/bin/php /var/www/spotweb/retrieve.php >/dev/null 2>&1
 
-This example will retrieve new posts every 15 minutes.
+This example will retrieve new spots every 15 minutes.
 
 ### Updates
 
