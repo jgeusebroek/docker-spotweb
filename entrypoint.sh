@@ -24,7 +24,7 @@ if [ -f /config/dbsettings.inc.php ]; then
 	ln -s /config/dbsettings.inc.php /var/www/spotweb/dbsettings.inc.php
 
 	# Run database update
-	/usr/bin/php /var/www/spotweb/upgrade-db.php
+	/usr/bin/php /var/www/spotweb/bin/upgrade-db.php
 else
 	echo -e "\nWARNING: You have no database configuration file, either create /config/dbsettings.inc.php or restart this container with the correct environment variables to auto generate the config.\n"
 fi
