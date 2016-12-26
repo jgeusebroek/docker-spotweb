@@ -3,7 +3,7 @@ MAINTAINER Jeroen Geusebroek <me@jeroengeusebroek.nl>
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm" \
-    APTLIST="apache2 php7.0 php7.0-curl php7.0-gd php7.0-gmp php7.0-mysql php-xml php-xmlrpc git-core" \
+    APTLIST="apache2 php7.0 php7.0-curl php7.0-gd php7.0-gmp php7.0-mysql php7.0-xml php7.0-xmlrpc php7.0-mbstring git-core" \
     REFRESHED_AT='2016-12-26'
 
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
