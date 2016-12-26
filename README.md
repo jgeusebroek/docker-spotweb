@@ -1,5 +1,4 @@
-[![](https://badge.imagelayers.io/jgeusebroek/spotweb:latest.svg)](https://imagelayers.io/?images=jgeusebroek/spotweb:latest 'Get your own badge on imagelayers.io')
-
+[![](https://images.microbadger.com/badges/image/jgeusebroek/spotweb.svg)](https://microbadger.com/images/jgeusebroek/spotweb "Get your own image badge on microbadger.com")
 # Docker Spotweb image
 
 An image running [ubuntu/15.10](https://github.com/gliderlabs/docker-alpine) Linux and [Spotweb](https://github.com/spotweb/spotweb) (media branch).
