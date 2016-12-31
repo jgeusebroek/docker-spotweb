@@ -31,7 +31,7 @@ fi
 
 TZ=${TZ:-"Europe/Amsterdam"}
 echo -e "Setting (PHP) time zone to ${TZ}\n"
-sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g" /etc/php5/*/php.ini
+sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g"  /etc/php/7.*/*/php.ini
 
 # Enabling PHP mod rewrite
 /usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
