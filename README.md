@@ -1,7 +1,7 @@
 [![](https://images.microbadger.com/badges/image/jgeusebroek/spotweb.svg)](https://microbadger.com/images/jgeusebroek/spotweb "Get your own image badge on microbadger.com")
 # Docker Spotweb image
 
-An image running [ubuntu/16.10](https://github.com/ubuntu/16.10) Linux and [Spotweb](https://github.com/spotweb/spotweb) (media branch).
+An image running [ubuntu/16.10](https://github.com/ubuntu/16.10) Linux and [Spotweb](https://github.com/spotweb/spotweb).
 
 ## Requirements
 
@@ -22,7 +22,7 @@ You need a seperate MySQL / MariaDB server. This can of course be a (linked) doc
 		-e SPOTWEB_DB_PASS=spotweb \
 		jgeusebroek/spotweb
 
-You should now be able to reach the spotweb interface on port 80, and you can configure Spotweb.
+You should now be able to reach the spotweb interface on port 80, and you can configure Spotweb. The install URL: 'http://yourhost/install.php'
 
 ### Automatic retreiving of new spots
 
