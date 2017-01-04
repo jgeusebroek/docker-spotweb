@@ -10,11 +10,28 @@ You need a seperate MySQL / MariaDB server. This can of course be a (linked) doc
 
 ## Usage
 
+### Initial Installation
+
+First create a database on your database server, and make sure the container has access to the database, then run a temporary container.
+
+	docker run -it --rm -p 80:80 \
+		-e TZ='Europe/Amsterdam' \
+		jgeusebroek/spotweb
+
+Please NOTE that there is no database configuration here, this will enable the install process.
+
+The run the Spotweb installer using the web interface: 'http://yourhost/install.php'.
+This will create the necessary database tables and users. Ignore the warning when it tries to save the configuration.
+
+When you are done, exit the container (CTRL/CMD-c) and configure the permanent running container.
+
+### Permanent installation
+
 	docker run --restart=always -d -p 80:80 \
 		--hostname=spotweb \
 		--name=spotweb \
 		-v <hostdir_where_config_will_persistently_be_stored>:/config \
-		-e TZ='Europe/Amsterdam'
+		-e TZ='Europe/Amsterdam' \
 		-e SPOTWEB_DB_TYPE=pdo_mysql \
 		-e SPOTWEB_DB_HOST=<database_server_hostname> \
 		-e SPOTWEB_DB_NAME=spotweb \
@@ -22,7 +39,9 @@ You need a seperate MySQL / MariaDB server. This can of course be a (linked) doc
 		-e SPOTWEB_DB_PASS=spotweb \
 		jgeusebroek/spotweb
 
-You should now be able to reach the spotweb interface on port 80, and you can configure Spotweb. The install URL: 'http://yourhost/install.php'
+Please NOTE that the volume is optional. Only necessary when you have special configuration settings.
+
+You should now be able to reach the spotweb interface on port 80.
 
 ### Automatic retreiving of new spots
 
@@ -34,8 +53,7 @@ This example will retrieve new spots every 15 minutes.
 
 ### Updates
 
-The container will try to auto-update the database when a newer version image is  released.
-
+The container will try to auto-update the database when a newer version is released.
 
 ### Environment variables
 
