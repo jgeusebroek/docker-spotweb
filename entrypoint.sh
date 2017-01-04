@@ -22,9 +22,6 @@ if [ -f /config/dbsettings.inc.php ]; then
 	chown www-data:www-data /config/dbsettings.inc.php
 	rm /var/www/spotweb/dbsettings.inc.php
 	ln -s /config/dbsettings.inc.php /var/www/spotweb/dbsettings.inc.php
-
-	# Run database update
-	/usr/bin/php /var/www/spotweb/bin/upgrade-db.php
 else
 	echo -e "\nWARNING: You have no database configuration file, either create /config/dbsettings.inc.php or restart this container with the correct environment variables to auto generate the config.\n"
 fi
@@ -32,6 +29,9 @@ fi
 TZ=${TZ:-"Europe/Amsterdam"}
 echo -e "Setting (PHP) time zone to ${TZ}\n"
 sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g"  /etc/php/7.*/*/php.ini
+
+# Run database update
+/usr/bin/php /var/www/spotweb/bin/upgrade-db.php >/dev/null 2>&1
 
 # Enabling PHP mod rewrite
 /usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
