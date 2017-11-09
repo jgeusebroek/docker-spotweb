@@ -8,6 +8,8 @@ touch /config/ownsettings.php && chown www-data:www-data /config/ownsettings.php
 rm -f /var/www/spotweb/ownsettings.php
 ln -s /config/ownsettings.php /var/www/spotweb/ownsettings.php
 
+chown -R www-data:www-data /var/www/spotweb
+
 if [[ -n "$SPOTWEB_DB_TYPE" && -n "$SPOTWEB_DB_HOST" && -n "$SPOTWEB_DB_NAME" && -n "$SPOTWEB_DB_USER" && -n "$SPOTWEB_DB_PASS" ]]; then
     echo "Creating database configuration"
     echo "<?php" > /config/dbsettings.inc.php
