@@ -1,7 +1,7 @@
 [![](https://images.microbadger.com/badges/image/jgeusebroek/spotweb.svg)](https://microbadger.com/images/jgeusebroek/spotweb "Get your own image badge on microbadger.com")
 # Docker Spotweb image
 
-An image running [ubuntu/16.10](https://github.com/ubuntu/16.10) Linux and [Spotweb](https://github.com/spotweb/spotweb).
+An image running [ubuntu/17.10](https://github.com/ubuntu/17.10) Linux and [Spotweb](https://github.com/spotweb/spotweb).
 
 ## Requirements
 
