@@ -47,7 +47,7 @@ You should now be able to reach the spotweb interface on port 80.
 
 To enable automatic retreiving, you need to setup a cronjob on the docker host.
 
-	*/15 * * * * docker exec spotweb /usr/bin/php /var/www/spotweb/retrieve.php >/dev/null 2>&1
+	*/15 * * * * docker exec spotweb su -l www-data -s /usr/bin/php /var/www/spotweb/retrieve.php >/dev/null 2>&1
 
 This example will retrieve new spots every 15 minutes.
 
