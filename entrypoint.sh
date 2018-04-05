@@ -32,6 +32,18 @@ TZ=${TZ:-"Europe/Amsterdam"}
 echo -e "Setting (PHP) time zone to ${TZ}\n"
 sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g"  /etc/php/7.*/*/php.ini
 
+if [[ -n "$SPOTWEB_CRON_RETRIEVE" || -n "$SPOTWEB_CRON_CACHE_CHECK" ]]; then
+    ln -sf /proc/$$/fd/1 /var/log/stdout
+    service cron start
+	if [[ -n "$SPOTWEB_CRON_RETRIEVE" ]]; then
+        echo "$SPOTWEB_CRON_RETRIEVE su -l www-data -s /usr/bin/php /var/www/spotweb/retrieve.php >/var/log/stdout 2>&1" > /etc/crontab
+	fi
+	if [[ -n "$SPOTWEB_CRON_CACHE_CHECK" ]]; then
+        echo "$SPOTWEB_CRON_CACHE_CHECK su -l www-data -s /usr/bin/php /var/www/spotweb/bin/check-cache.php >/var/log/stdout 2>&1" >> /etc/crontab
+	fi
+    crontab /etc/crontab
+fi
+
 # Run database update
 /usr/bin/php /var/www/spotweb/bin/upgrade-db.php >/dev/null 2>&1
 
@@ -41,4 +53,4 @@ rm -rf /run/apache2/apache2.pid
 # Enabling PHP mod rewrite
 /usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
 
-tail -F /var/log/apache2/*
+tail -F /var/log/apache2/* /dev/stdout /dev/stderr
