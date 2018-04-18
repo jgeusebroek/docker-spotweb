@@ -3,15 +3,15 @@ MAINTAINER Jeroen Geusebroek <me@jeroengeusebroek.nl>
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm" \
-    APTLIST="apache2 php7.1 php7.1-curl php7.1-gd php7.1-gmp php7.1-mysql php7.1-xml php7.1-xmlrpc php7.1-mbstring php7.1-zip git-core cron" \
-    REFRESHED_AT='2018-03-16'
+    APTLIST="apache2 php7.1 php7.1-curl php7.1-gd php7.1-gmp php7.1-mysql php7.1-pgsql php7.1-xml php7.1-xmlrpc php7.1-mbstring php7.1-zip git-core cron" \
+    REFRESHED_AT='2018-04-18'
 
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache && \
     apt-get -q update && \
     apt-get -qy dist-upgrade && \
     apt-get install -qy $APTLIST && \
-
+    \
     # Cleanup
     apt-get -y autoremove && \
     apt-get -y clean && \
