@@ -33,12 +33,12 @@ When you are done, exit the container (CTRL/CMD-c) and configure the permanent r
 		--hostname=spotweb \
 		--name=spotweb \
 		-v <hostdir_where_config_will_persistently_be_stored>:/config \
-		-e TZ='Europe/Amsterdam' \
-		-e SPOTWEB_DB_TYPE=pdo_mysql \
-		-e SPOTWEB_DB_HOST=<database_server_hostname> \
-		-e SPOTWEB_DB_NAME=spotweb \
-		-e SPOTWEB_DB_USER=spotweb \
-		-e SPOTWEB_DB_PASS=spotweb \
+		-e 'TZ=Europe/Amsterdam' \
+		-e 'SPOTWEB_DB_TYPE=pdo_mysql' \
+		-e 'SPOTWEB_DB_HOST=<database_server_hostname>' \
+		-e 'SPOTWEB_DB_NAME=spotweb' \
+		-e 'SPOTWEB_DB_USER=spotweb' \
+		-e 'SPOTWEB_DB_PASS=spotweb' \
 		jgeusebroek/spotweb
 
 Please NOTE that the volume is optional. Only necessary when you have special configuration settings.
@@ -56,7 +56,7 @@ This example will retrieve new spots every 15 minutes.
 #### Automatic retrieval of new spots from within the container
 To enable automatic retrieval from within the container, use the `SPOTWEB_CRON_RETRIEVE` variable to specify the cron timing for retrieval. For example as additional parameter to the `docker run` command:
 
-    -e SPOTWEB_CRON_RETRIEVE='*/15 * * * *'
+    -e 'SPOTWEB_CRON_RETRIEVE=*/15 * * * *'
 
 
 ### Updates
@@ -72,8 +72,8 @@ The container will try to auto-update the database when a newer version is relea
 | `SPOTWEB_DB_NAME` | The database used for spotweb. |
 | `SPOTWEB_DB_USER` | The database server username. |
 | `SPOTWEB_DB_PASS` | The database server password. |
-| `SPOTWEB_CRON_RETRIEVE` | Cron schedule for article retrieval. E.g. `'*/15 * * * *'` for every fifteen minutes.|
-| `SPOTWEB_CRON_CACHE_CHECK` | Cron schedule for article cache sanity check. E.g. `'10 */1 * * *'` for 10 minutes after every hour. |
+| `SPOTWEB_CRON_RETRIEVE` | Cron schedule for article retrieval. E.g. `*/15 * * * *` for every fifteen minutes.|
+| `SPOTWEB_CRON_CACHE_CHECK` | Cron schedule for article cache sanity check. E.g. `10 */1 * * *` for 10 minutes after every hour. |
 
 ## License
 
