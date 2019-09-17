@@ -43,7 +43,7 @@ When you are done, exit the container (CTRL/CMD-c) and configure the permanent r
 		jgeusebroek/spotweb
 
 Please NOTE that the volume is optional. Only necessary when you have special configuration settings.
-The database port is also optional. If omitted it will use the standard ports MySQL / PostgreSQL.
+The database port is also optional. If omitted it will use the standard port for MySQL / PostgreSQL.
 
 You should now be able to reach the spotweb interface on port 80.
 
