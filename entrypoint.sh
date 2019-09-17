@@ -20,6 +20,10 @@ if [[ -n "$SPOTWEB_DB_TYPE" && -n "$SPOTWEB_DB_HOST" && -n "$SPOTWEB_DB_NAME" &&
     echo "\$dbsettings['pass'] = '$SPOTWEB_DB_PASS';"  >> /config/dbsettings.inc.php
 fi
 
+if [[ -n "$SPOTWEB_DB_PORT" ]]; then
+    echo "\$dbsettings['port'] = '$SPOTWEB_DB_PORT';"  >> /config/dbsettings.inc.php
+fi
+
 if [ -f /config/dbsettings.inc.php ]; then
 	chown www-data:www-data /config/dbsettings.inc.php
 	rm /var/www/spotweb/dbsettings.inc.php

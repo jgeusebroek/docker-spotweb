@@ -36,12 +36,14 @@ When you are done, exit the container (CTRL/CMD-c) and configure the permanent r
 		-e 'TZ=Europe/Amsterdam' \
 		-e 'SPOTWEB_DB_TYPE=pdo_mysql' \
 		-e 'SPOTWEB_DB_HOST=<database_server_hostname>' \
+		-e 'SPOTWEB_DB_PORT=<database_port>' \
 		-e 'SPOTWEB_DB_NAME=spotweb' \
 		-e 'SPOTWEB_DB_USER=spotweb' \
 		-e 'SPOTWEB_DB_PASS=spotweb' \
 		jgeusebroek/spotweb
 
 Please NOTE that the volume is optional. Only necessary when you have special configuration settings.
+The database port is also optional. If omitted it will use the standard ports MySQL / PostgreSQL.
 
 You should now be able to reach the spotweb interface on port 80.
 
@@ -68,7 +70,8 @@ The container will try to auto-update the database when a newer version is relea
 | --- | --- |
 | `TZ` | The timezone the server is running in. Defaults to `Europe/Amsterdam`. |
 | `SPOTWEB_DB_TYPE` | Database type. Use `pdo_mysql` for MySQL. |
-| `SPOTWEB_DB_HOST` | The hostname / IP of the database server. |
+| `SPOTWEB_DB_HOST` | The database hostname / IP. |
+| `SPOTWEB_DB_PORT` | The database port. Optional. |
 | `SPOTWEB_DB_NAME` | The database used for spotweb. |
 | `SPOTWEB_DB_USER` | The database server username. |
 | `SPOTWEB_DB_PASS` | The database server password. |
