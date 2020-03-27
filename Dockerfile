@@ -29,6 +29,11 @@ RUN chmod u+x /entrypoint.sh
 
 COPY files/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
+# Add caching and compression config to .htaccess
+COPY files/001-htaccess.conf .
+RUN cat /001-htaccess.conf >> /var/www/spotweb/.htaccess
+RUN rm /001-htaccess.conf
+
 VOLUME [ "/config" ]
 
 EXPOSE 80

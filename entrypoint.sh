@@ -54,7 +54,15 @@ fi
 # Clean up apache pid (if there is one)
 rm -rf /run/apache2/apache2.pid
 
-# Enabling PHP mod rewrite
-/usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
+# Enabling PHP mod rewrite, expires and deflate (they may be on already by default)
+unset rt
+/usr/sbin/a2enmod rewrite && rt=1
+/usr/sbin/a2enmod expires && rt=1
+/usr/sbin/a2enmod deflate && rt=1
+
+# Only restart if one of the enmod commands succeeded 
+if [[ -n $rt ]]; then
+    /etc/init.d/apache2 restart
+fi
 
 tail -F /var/log/apache2/* /dev/stdout /dev/stderr
