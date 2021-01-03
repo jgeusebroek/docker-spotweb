@@ -70,11 +70,11 @@ The container will try to auto-update the database when a newer version is relea
 
 An example `docker-compose.yml` is included. Create your base directory and edit the environment variables to suit your needs. After the initial run (`docker-compose up -d`) you will need to remove the `<base_dir>/spotweb/dbsettings.inc.php` because otherwise the install process won't proceed. Don't worry, your settings won't be lost.
 
-After you deleted the file, point your browser to your install (ie. [http://localhost:81/install.php](http://localhost:81/install.php)) and follow the installation procedure. 
+After you deleted the file, point your browser to your install (ie. [http://localhost:81/install.php](http://localhost:81/install.php)) and follow the installation procedure.
 
 It might give you an error saying it can't write the settings to file. You can ignore this.
 
-When this all is fininished, restart spotweb using `docker-compose restart`. You should now have a working spotweb installation. (please note the `<base_dir>/spotweb/dbsettings.inc.php` file will be automatically recreated during the restart). 
+When this all is finished, restart spotweb using `docker-compose restart`. You should now have a working spotweb installation. (please note the `<base_dir>/spotweb/dbsettings.inc.php` file will be automatically recreated during the restart). 
 
 ### Environment variables
 | Variable | Function |
