@@ -1,0 +1,40 @@
+version: "2.1"
+services:
+  spotweb:
+    image: jgeusebroek/spotweb
+    container_name: spotweb
+    restart: unless-stopped
+    environment:
+     - PUID=1001
+     - GUID=1001
+     - TZ=Europe/Amsterdam
+     - SPOTWEB_DB_TYPE=pdo_mysql
+     - SPOTWEB_DB_HOST=spotweb_db
+     - SPOTWEB_DB_PORT=3306
+     - SPOTWEB_DB_NAME=spotweb
+     - SPOTWEB_DB_USER=spotweb
+     - SPOTWEB_DB_PASS=spotweb
+     - "SPOTWEB_CRON_RETRIEVE=* */2 * * *"
+    depends_on:
+     - spotwebdb
+    ports:
+     - 81:80
+    volumes:
+     - <your_base_directory>/spotweb:/config
+
+  spotweb_db:
+    image: linuxserver/mariadb
+    container_name: spotwebdb
+    restart: unless-stopped
+    environment:
+     - PUID=1001
+     - PGID=1001
+     - MYSQL_ROOT_PASSWORD=spotweb
+     - TZ=Europe/Amsterdam
+     - MYSQL_DATABASE=spotweb
+     - MYSQL_USER=spotweb
+     - MYSQL_PASSWORD=spotweb
+    volumes:
+     - <your_base_directory>/mariadb:/config
+    ports:
+     - 3306:3306

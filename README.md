@@ -9,6 +9,7 @@ An image running [ubuntu/20.04](https://hub.docker.com/_/ubuntu/) Linux and [Spo
 
 You need a seperate MySQL / MariaDB server. This can of course be a (linked) docker container but also a dedicated database server.
 
+If you would like to use docker-compose, a short guide can be found [below](#docker-compose). Thanks to [Daniel Jongepier](https://github.com/djongepier).
 
 ## Usage
 
@@ -64,6 +65,16 @@ To enable automatic retrieval from within the container, use the `SPOTWEB_CRON_R
 ### Updates
 
 The container will try to auto-update the database when a newer version is released.
+
+### Docker compose
+
+An example `docker-compose.yml` is included. Create your base directory and edit the environment variables to suit your needs. After the initial run (`docker-compose up -d`) you will need to remove the `<base_dir>/spotweb/dbsettings.inc.php` because otherwise the install process won't proceed. Don't worry, your settings won't be lost.
+
+After you deleted the file, point your browser to your install (ie. [http://localhost:81/install.php](http://localhost:81/install.php)) and follow the installation procedure. 
+
+It might give you an error saying it can't write the settings to file. You can ignore this.
+
+When this all is fininished, restart spotweb using `docker-compose restart`. You should now have a working spotweb installation. (please note the `<base_dir>/spotweb/dbsettings.inc.php` file will be automatically recreated during the restart). 
 
 ### Environment variables
 | Variable | Function |
