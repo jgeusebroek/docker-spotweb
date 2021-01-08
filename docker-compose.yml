@@ -16,7 +16,7 @@ services:
      - SPOTWEB_DB_PASS=spotweb
      - "SPOTWEB_CRON_RETRIEVE=* */2 * * *"
     depends_on:
-     - spotwebdb
+     - spotweb_db
     ports:
      - 81:80
     volumes:
