@@ -20,5 +20,5 @@ jobs:
       - name: build the image
         run: |
           docker buildx build --push \
-            --tag jgeusebroek/docker-spotweb:latest \
+            --tag jgeusebroek/spotweb:latest \
             --platform linux/amd64,linux/arm/v7,linux/arm64 .
