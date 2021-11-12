@@ -3,12 +3,13 @@ LABEL Author="Jeroen Geusebroek <me@jeroengeusebroek.nl>"
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm" \
-    APTLIST="apache2 php7.4 php7.4-curl php7.4-gd php7.4-gmp php7.4-mysql php7.4-pgsql php7.4-xml php7.4-xmlrpc php7.4-mbstring php7.4-zip git-core cron wget jq locales" \
+    APTLIST="apache2 php8.0 php8.0-curl php8.0-gd php8.0-gmp php8.0-mysql php8.0-pgsql php8.0-xml php8.0-xmlrpc php8.0-mbstring php8.0-zip git-core cron wget jq locales" \
     REFRESHED_AT='2021-11-12'
 
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache && \
     apt-get -q update && \
+    apt -qy install software-properties-common && add-apt-repository ppa:ondrej/php && \
     apt-get -qy dist-upgrade && \
     apt-get install -qy $APTLIST && \
     a2enmod headers && \
