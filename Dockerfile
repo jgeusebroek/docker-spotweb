@@ -4,13 +4,14 @@ LABEL Author="Jeroen Geusebroek <me@jeroengeusebroek.nl>"
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm" \
     APTLIST="apache2 php7.4 php7.4-curl php7.4-gd php7.4-gmp php7.4-mysql php7.4-pgsql php7.4-xml php7.4-xmlrpc php7.4-mbstring php7.4-zip git-core cron wget jq locales" \
-    REFRESHED_AT='2021-07-31'
+    REFRESHED_AT='2021-11-12'
 
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache && \
     apt-get -q update && \
     apt-get -qy dist-upgrade && \
     apt-get install -qy $APTLIST && \
+    a2enmod headers && \
     locale-gen --no-purge nl_NL.UTF-8 en_US.UTF-8 && \
     \
     # Cleanup
