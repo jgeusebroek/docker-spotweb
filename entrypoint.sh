@@ -34,7 +34,7 @@ fi
 
 TZ=${TZ:-"Europe/Amsterdam"}
 echo -e "Setting (PHP) time zone to ${TZ}\n"
-sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g"  /etc/php/7.*/*/php.ini
+sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g"  /etc/php/8.*/*/php.ini
 
 if [[ -n "$SPOTWEB_CRON_RETRIEVE" || -n "$SPOTWEB_CRON_CACHE_CHECK" ]]; then
     ln -sf /proc/$$/fd/1 /var/log/stdout
@@ -60,7 +60,7 @@ unset rt
 /usr/sbin/a2enmod expires && rt=1
 /usr/sbin/a2enmod deflate && rt=1
 
-# Only restart if one of the enmod commands succeeded 
+# Only restart if one of the enmod commands succeeded
 if [[ -n $rt ]]; then
     /etc/init.d/apache2 restart
 fi
