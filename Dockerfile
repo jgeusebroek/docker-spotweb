@@ -3,8 +3,7 @@ LABEL Author="Jeroen Geusebroek <me@jeroengeusebroek.nl>"
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm" \
-    APTLIST="apache2 php8.0 php8.0-curl php8.0-gd php8.0-gmp php8.0-mysql php8.0-pgsql php8.0-xml php8.0-xmlrpc php8.0-mbstring php8.0-zip git-core cron wget jq locales" \
-    REFRESHED_AT='2021-11-12'
+    APTLIST="apache2 php8.1 php8.1-curl php8.1-gd php8.1-gmp php8.1-mysql php8.1-pgsql php8.1-xml php8.1-xmlrpc php8.1-mbstring php8.1-zip git-core cron wget jq locales"
 
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache && \
@@ -22,8 +21,11 @@ RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     rm -r /var/www/html && \
     rm -rf /tmp/*
 
-RUN git clone -b master --depth 1 --single-branch https://github.com/spotweb/spotweb.git /var/www/spotweb && \
-    # rm -rf /var/www/spotweb/.git && \
+RUN git clone --no-checkout -b master --depth 1 --single-branch https://github.com/spotweb/spotweb.git /var/www/spotweb && \
+    cd /var/www/spotweb && \
+    git config core.symlinks false && \
+    git checkout && \
+    rm -rf /var/www/spotweb/.git && \
     chmod -R 775 /var/www/spotweb && \
     chown -R www-data:www-data /var/www/spotweb
 
