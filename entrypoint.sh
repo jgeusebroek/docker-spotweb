@@ -62,6 +62,12 @@ unset rt
 /usr/sbin/a2enmod expires && rt=1
 /usr/sbin/a2enmod deflate && rt=1
 
+# Change Apache port if needed from the default 80 to `WEBSERVER_PORT` (to run unprivileged or with a host network where no port mapping is available)
+if [[ -n "$WEBSERVER_PORT" ]]; then
+    sed -i "s/Listen 80/Listen \$WEBSERVER_PORT/" /etc/apache2/ports.conf
+    sed -i "s/VirtualHost *:80/VirtualHost *:\$WEBSERVER_PORT/" /etc/apache2/sites-enabled/000-default.conf
+fi
+
 # Only restart if one of the enmod commands succeeded
 if [[ -n $rt ]]; then
     /etc/init.d/apache2 restart
