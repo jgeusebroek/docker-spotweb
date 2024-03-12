@@ -88,6 +88,7 @@ When this all is finished, restart spotweb using `docker-compose restart`. You s
 | `SPOTWEB_DB_PASS` | The database server password. |
 | `SPOTWEB_CRON_RETRIEVE` | Cron schedule for article retrieval. E.g. `*/15 * * * *` for every fifteen minutes.|
 | `SPOTWEB_CRON_CACHE_CHECK` | Cron schedule for article cache sanity check. E.g. `10 */1 * * *` for 10 minutes after every hour. |
+| `WEBSERVER_PORT` | Change the webserver port (for when you can't use port mapping with host network for example)|
 
 ## License
 
