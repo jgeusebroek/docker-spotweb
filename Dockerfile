@@ -21,7 +21,7 @@ RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
     rm -r /var/www/html && \
     rm -rf /tmp/*
 
-RUN git clone --no-checkout -b master --depth 1 --single-branch https://github.com/spotweb/spotweb.git /var/www/spotweb && \
+RUN git clone --no-checkout -b develop --depth 1 --single-branch https://github.com/spotweb/spotweb.git /var/www/spotweb && \
     cd /var/www/spotweb && \
     git config core.symlinks false && \
     git checkout && \
